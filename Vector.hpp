@@ -17,8 +17,10 @@ public:
 
     // Operator overloading
     Vector& operator=(const Vector& other);
-    const double& operator()(int i) const;   // 1-based indexing const version
-    const double& operator[](int i) const;   // 0-based indexing const version
+    double& operator()(int i);
+    const double& operator()(int i) const;//const ver
+    double& operator[](int i);
+    const double& operator[](int i) const;   //const ver
     
     // Unary operators
     Vector operator+() const;
@@ -30,11 +32,9 @@ public:
     Vector operator*(double scalar) const;
     double operator*(const Vector& other) const; // Dot product
     
-    // Other operations
     double Norm() const;
 };
-
-// Non-member operator for scalar multiplication (scalar * vector)
+// Non-member vi neu la member func thi the object need to be on the left side
 Vector operator*(double scalar, const Vector& vec);
 
-#endif // VECTOR_HPP
+#endif 

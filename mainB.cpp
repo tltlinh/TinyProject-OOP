@@ -90,7 +90,6 @@ int main() {
         }
         feature_stds[j] = sqrt(sum_sq / train_size);
        
-        // Handle constant features (avoid division by zero)
         if (feature_stds[j] < 1e-7) {
             feature_stds[j] = 1.0;
         }

@@ -34,24 +34,22 @@ Vector LinearSystemB::SolvewithMoore_Penrose(Matrix& A,  Vector& b) const {
         Matrix AAt_inverse = AAt.Inverse();
         return At * AAt_inverse * (*mpb);
     }
-
 }
 
 Vector LinearSystemB::SolveWithTikhonov(Matrix& A,  Vector& b) {
-    //check 
     Matrix A_t = A.Transpose();
-    int n = A.GetNumCols();
     float lambda=0.01;
     if (A.GetNumRows() >= A.GetNumCols()) {
         // over-determined (A^T A + λI)^-1 A^T b
         Matrix ATA = A_t * A;
-        Matrix lambda_ver = ATA + A.Identity(n) * lambda;
+        int n = A.GetNumCols();
+        Matrix lambda_ver = ATA + ATA.Identity(n) * lambda;
         return lambda_ver.Inverse() * A_t * b;
     } else {
         // under-determined A^T (A A^T + λI)^-1 b
         Matrix AAT = A * A_t;
-        int m = A.GetNumRows();
-        Matrix lambda_ver = AAT + A.Identity(n) * lambda;
+        int m = A.GetNumCols();
+        Matrix lambda_ver = AAT + AAT.Identity(m) * lambda;
         return A_t * lambda_ver.Inverse() * b;
     }
 }

@@ -40,11 +40,20 @@ Vector& Vector::operator=(const Vector& V) {
 }
 
 
+double& Vector::operator()(int i) {
+    if (i < 1 || i > mSize) throw std::out_of_range("Vector index out of range");
+    return mData[i-1];
+}
+
 const double& Vector::operator()(int i) const {
     if (i < 1 || i > mSize) throw std::out_of_range("Vector index out of range");
     return mData[i-1];
 }
 
+double& Vector::operator[](int i) {
+    if (i < 0 || i >= mSize) throw std::out_of_range("Vector index out of range");
+    return mData[i];
+}
 
 const double& Vector::operator[](int i) const {
     if (i < 0 || i >= mSize) throw std::out_of_range("Vector index out of range");

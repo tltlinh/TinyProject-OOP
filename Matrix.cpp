@@ -5,7 +5,6 @@
 #include <algorithm>
 using namespace std;
 Matrix::Matrix(int numRows, int numCols) {
-    std::cout << "[Matrix::Matrix] numRows=" << numRows << ", numCols=" << numCols << std::endl;
     mNumRows=numRows; 
     mNumCols=numCols; 
     if (numRows <= 0 || numCols <= 0) {
@@ -91,8 +90,8 @@ Matrix& Matrix::operator=(const Matrix& other) {
     return *this;
 }
 
-Matrix Matrix::operator+() const {
-    return *this;  // Simply returns a copy of the matrix
+Matrix Matrix::operator+() const { 
+    return *this; 
 }
 
 Matrix Matrix::operator-() const {
@@ -173,20 +172,20 @@ Vector Matrix::operator*(const Vector& vec) const {
 double Matrix::Determinant() const {
     // Kiểm tra ma trận vuông
     if (mNumRows != mNumCols) {
-        throw std::runtime_error("Matrix must be square to compute determinant");
+        throw runtime_error("Matrix must be square to compute determinant");
     }//dung assert 
     
-    // Trường hợp ma trận 1x1
+    //ma trận 1x1
     if (mNumRows == 1) {
         return mData[0][0];
     }
     
-    // Trường hợp ma trận 2x2
+    //ma trận 2x2
     if (mNumRows == 2) {
         return mData[0][0] * mData[1][1] - mData[0][1] * mData[1][0];
     }
     
-    // Ma trận lớn hơn: sử dụng khai triển Laplace
+    //sử dụng khai triển Laplace
     double det = 0.0;
     int sign = 1;
     
@@ -202,9 +201,8 @@ double Matrix::Determinant() const {
             }
         }
         
-        // Cộng vào định thức
         det += sign * mData[0][col] * subMatrix.Determinant();
-        sign = -sign;  // Đổi dấu cho phần tử tiếp theo
+        sign = -sign;  
     }
     
     return det;
@@ -301,7 +299,7 @@ Matrix Matrix::PseudoInverse() const {
     }
 }
 
-Matrix Matrix::Identity(int size) {
+Matrix Matrix::Identity(int size) { //still need size because we 
     Matrix I(size, size); 
     for (int i = 0; i < size; ++i) {
         I(i+1, i+1) = 1.0;
