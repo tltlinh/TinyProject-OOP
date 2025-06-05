@@ -21,19 +21,7 @@ LinearSystemB::~LinearSystemB() {
 
 // Ordinary Least Squares: x = (A^T A)^(-1) A^T b
 Vector LinearSystemB::SolvewithMoore_Penrose(Matrix& A,  Vector& b) const {
-    Matrix At = A.Transpose();
-    Matrix AtA = At * (*mpA);
-
-    if (mRows >= mCols) { 
-        // A+ = (A^T A)^-1 A^T
-        Matrix AtA_inverse = AtA.Inverse();
-        return AtA_inverse * At * (*mpb);
-    } else {
-        // A+ = A^T (A A^T)^-1
-        Matrix AAt = (*mpA) * At;
-        Matrix AAt_inverse = AAt.Inverse();
-        return At * AAt_inverse * (*mpb);
-    }
+    return A.PseudoInverse() * b;
 }
 
 Vector LinearSystemB::SolveWithTikhonov(Matrix& A,  Vector& b) {
