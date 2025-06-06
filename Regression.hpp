@@ -10,7 +10,7 @@
 
 class LinearRegression {
 private:
-    Vector weights; // Model coefficients (including bias)
+    Vector x; // Model coefficients (including bias)
     bool trained;   // Training status flag
 
 
