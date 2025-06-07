@@ -6,7 +6,7 @@
 using namespace std;
 
 LinearRegression::LinearRegression()
-    : x(1),  // Initialize with empty matrix
+    : x(1),  
       trained(false) {}
 
 
@@ -27,7 +27,7 @@ Vector LinearRegression::predict(const Matrix& A) const {
     return A*x;
 }
 
-double LinearRegression::rmse(const Vector& predictions, const Vector& targets) const {
+double LinearRegression::RMSE(const Vector& predictions, const Vector& targets) const {
     double sum = 0.0;
     int n = predictions.GetSize();
     for (int i = 0; i < n; i++) {
@@ -37,14 +37,13 @@ double LinearRegression::rmse(const Vector& predictions, const Vector& targets) 
     return sqrt(sum/n);
 }
 
-
 // Output: Displays model coefficients
-void LinearRegression::printWeights() const {
+void LinearRegression::GetxVector() {
     if (!trained) {
         cout << "Model is not trained.\n";
         return;
     }
     cout << "Weights:\n";
     for (int i = 0; i < x.GetSize(); i++)
-        cout << "w" << i << ": " << x(i+1) << "\n";
+        cout << "x" << i << ": " << x(i+1) << "\n";
 }

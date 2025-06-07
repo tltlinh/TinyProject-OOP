@@ -25,7 +25,6 @@ Vector::~Vector() {
 
 int Vector::GetSize() const {return mSize; }
 
-
 Vector& Vector::operator=(const Vector& V) {
     if (this != &V) {
         if (mSize != V.mSize) {
@@ -41,22 +40,22 @@ Vector& Vector::operator=(const Vector& V) {
 
 
 double& Vector::operator()(int i) {
-    if (i < 1 || i > mSize) throw std::out_of_range("Vector index out of range");
+    if (i < 1 || i > mSize) cout <<"Vector index out of range";
     return mData[i-1];
 }
 
 const double& Vector::operator()(int i) const {
-    if (i < 1 || i > mSize) throw std::out_of_range("Vector index out of range");
+    if (i < 1 || i > mSize) cout <<"Vector index out of range";
     return mData[i-1];
 }
 
 double& Vector::operator[](int i) {
-    if (i < 0 || i >= mSize) throw std::out_of_range("Vector index out of range");
+    if (i < 0 || i >= mSize) cout <<"Vector index out of range";
     return mData[i];
 }
 
 const double& Vector::operator[](int i) const {
-    if (i < 0 || i >= mSize) throw std::out_of_range("Vector index out of range");
+    if (i < 0 || i >= mSize) cout <<"Vector index out of range";
     return mData[i];
 }
 
@@ -71,7 +70,7 @@ Vector Vector::operator-() const {
 }
 
 Vector Vector::operator+(const Vector& V) const {
-    if (mSize != V.mSize) throw std::invalid_argument("Vector sizes must match for addition");
+    if (mSize != V.mSize) cout <<"Vector sizes must match for addition";
     Vector tam(mSize);
     for (int i = 0; i < mSize; i++) 
         tam.mData[i] = mData[i] + V.mData[i];
@@ -79,7 +78,7 @@ Vector Vector::operator+(const Vector& V) const {
 }
 
 Vector Vector::operator-(const Vector& V) const {
-    if (mSize != V.mSize) throw std::invalid_argument("Vector sizes must match for subtraction");
+    if (mSize != V.mSize) cout <<"Vector sizes must match for subtraction";
     Vector tam(mSize);
     for (int i = 0; i < mSize; i++) 
         tam.mData[i] = mData[i] - V.mData[i];
@@ -94,16 +93,11 @@ Vector Vector::operator*(double scalar) const {
 }
 
 double Vector::operator*(const Vector& V) const {
-    if (mSize != V.mSize) throw std::invalid_argument("Vector sizes must match for dot product");
+    if (mSize != V.mSize) cout <<"Vector sizes must match for dot product";
     double tam = 0.0;
     for (int i = 0; i < mSize; i++) 
         tam += mData[i] * V.mData[i];
     return tam;
-}
-
-
-double Vector::Norm() const {
-    return std::sqrt((*this) * (*this));
 }
 
 Vector operator*(double scalar, const Vector& vec) {

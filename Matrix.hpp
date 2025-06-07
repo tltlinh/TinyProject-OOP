@@ -17,7 +17,6 @@ public:
 
     int GetNumRows() const { return mNumRows; }
     int GetNumCols() const { return mNumCols; }
-    double GetData(int r, int c) const { return mData[r][c]; }
 
     double& operator()(int i, int j);
     const double& operator()(int i, int j) const;

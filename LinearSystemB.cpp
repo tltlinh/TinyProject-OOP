@@ -1,9 +1,11 @@
 #include "LinearSystemB.hpp"
-#include "LinearSystem.hpp"
+#include "Vector.hpp"
 #include "Matrix.hpp"
 #include <stdexcept>
 #include <cmath>
 
+
+using namespace std;
 LinearSystemB::LinearSystemB(const Matrix& A, const Vector& b) {
     if (A.GetNumRows() != b.GetSize()) {
         throw std::invalid_argument("Matrix and vector dimensions must agree");

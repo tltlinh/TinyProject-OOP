@@ -1,5 +1,5 @@
-#ifndef LINEAR_SYSTEM_HPP
-#define LINEAR_SYSTEM_HPP
+#ifndef LINEAR_SYSTEM_B_HPP
+#define LINEAR_SYSTEM_B_HPP
 
 #include "Matrix.hpp"
 #include "Vector.hpp"
@@ -27,4 +27,4 @@ public:
 
 };
 
-#endif // LINEAR_SYSTEM_HPP
+#endif // LINEAR_SYSTEM_B_HPP

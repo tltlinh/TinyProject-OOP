@@ -23,7 +23,7 @@ public:
     
     // Phương thức giải hệ
     Vector virtual Solve() const;
-    Vector SolveWithTikhonov( Matrix& A, Vector& b);
+    
 
 };
 

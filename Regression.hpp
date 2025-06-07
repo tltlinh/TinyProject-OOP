@@ -24,11 +24,11 @@ public:
     Vector predict(const Matrix& A) const;
    
     // Computes Root Mean Squared Error
-    double rmse(const Vector& predictions, const Vector& targets) const;
+    double RMSE(const Vector& predictions, const Vector& targets) const;
 
 
     // Outputs model coefficients
-    void printWeights() const;
+    void GetxVector();
 };
 
 #endif

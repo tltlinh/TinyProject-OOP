@@ -13,9 +13,9 @@ Matrix::Matrix(int numRows, int numCols) {
 
     mData = new double*[mNumRows];
     
-    for (int i = 0; i < mNumRows; ++i) {
+    for (int i = 0; i < mNumRows; i++) {
         mData[i] = new double[mNumCols];
-        for (int j = 0; j < mNumCols; ++j) 
+        for (int j = 0; j < mNumCols; j++) 
             mData[i][j] = 0.0;
     }
 }
@@ -25,9 +25,9 @@ Matrix::Matrix(const Matrix& other) {
     mNumRows=other.mNumRows; 
     mNumCols=other.mNumCols; 
     mData = new double*[mNumRows];
-    for (int i = 0; i < mNumRows; ++i) {
+    for (int i = 0; i < mNumRows; i++) {
         mData[i] = new double[mNumCols];
-        for (int j = 0; j < mNumCols; ++j) {
+        for (int j = 0; j < mNumCols; j++) {
             mData[i][j] = other.mData[i][j];
         }
     }
@@ -36,7 +36,7 @@ Matrix::Matrix(const Matrix& other) {
 // Destructor
 Matrix::~Matrix() {
     // Giải phóng bộ nhớ từng hàng trước
-    for (int i = 0; i < mNumRows; ++i) {
+    for (int i = 0; i < mNumRows; i++) {
         delete[] mData[i];
     }
     // Giải phóng mảng con trỏ hàng
@@ -64,7 +64,7 @@ Matrix& Matrix::operator=(const Matrix& other) {
         // Nếu khác kích thước
         if (mNumRows != other.mNumRows || mNumCols != other.mNumCols) {
             // Giải phóng bộ nhớ cũ
-            for (int i = 0; i < mNumRows; ++i) {
+            for (int i = 0; i < mNumRows; i++) {
                 delete[] mData[i];
             }
             delete[] mData;
@@ -75,14 +75,14 @@ Matrix& Matrix::operator=(const Matrix& other) {
             
             // Cấp phát mới
             mData = new double*[mNumRows];
-            for (int i = 0; i < mNumRows; ++i) {
+            for (int i = 0; i < mNumRows; i++) {
                 mData[i] = new double[mNumCols];
             }
         }
         
         // Copy dữ liệu
-        for (int i = 0; i < mNumRows; ++i) {
-            for (int j = 0; j < mNumCols; ++j) {
+        for (int i = 0; i < mNumRows; i++) {
+            for (int j = 0; j < mNumCols; j++) {
                 mData[i][j] = other.mData[i][j];
             }
         }
@@ -96,8 +96,8 @@ Matrix Matrix::operator+() const {
 
 Matrix Matrix::operator-() const {
     Matrix tam(mNumRows, mNumCols);
-    for (int i = 0; i < mNumRows; ++i) {
-        for (int j = 0; j < mNumCols; ++j) {
+    for (int i = 0; i < mNumRows; i++) {
+        for (int j = 0; j < mNumCols; j++) {
             tam.mData[i][j] = -mData[i][j];
         }
     }
@@ -108,8 +108,8 @@ Matrix Matrix::operator+(const Matrix& other) const {
     assert(mNumRows == other.mNumRows && mNumCols == other.mNumCols);
     
     Matrix result(mNumRows, mNumCols);
-    for (int i = 0; i < mNumRows; ++i) {
-        for (int j = 0; j < mNumCols; ++j) {
+    for (int i = 0; i < mNumRows; i++) {
+        for (int j = 0; j < mNumCols; j++) {
             result.mData[i][j] = mData[i][j] + other.mData[i][j];
         }
     }
@@ -119,8 +119,8 @@ Matrix Matrix::operator-(const Matrix& other) const {
     assert(mNumRows == other.mNumRows && mNumCols == other.mNumCols);
     
     Matrix tam(mNumRows, mNumCols);
-    for (int i = 0; i < mNumRows; ++i) {
-        for (int j = 0; j < mNumCols; ++j) {
+    for (int i = 0; i < mNumRows; i++) {
+        for (int j = 0; j < mNumCols; j++) {
             tam.mData[i][j] = mData[i][j] - other.mData[i][j];
         }
     }
@@ -128,8 +128,8 @@ Matrix Matrix::operator-(const Matrix& other) const {
 }
 Matrix Matrix::operator*(double scalar) const {
     Matrix tam(mNumRows, mNumCols);
-    for (int i = 0; i < mNumRows; ++i) {
-        for (int j = 0; j < mNumCols; ++j) {
+    for (int i = 0; i < mNumRows; i++) {
+        for (int j = 0; j < mNumCols; j++) {
             tam.mData[i][j] = mData[i][j] * scalar;
         }
     }
@@ -146,9 +146,9 @@ Matrix Matrix::operator*(const Matrix& other) const {
     assert(mNumCols == other.mNumRows);
     
     Matrix result(mNumRows, other.mNumCols);
-    for (int i = 0; i < mNumRows; ++i) {
-        for (int j = 0; j < other.mNumCols; ++j) {
-            for (int k = 0; k < mNumCols; ++k) {
+    for (int i = 0; i < mNumRows; i++) {
+        for (int j = 0; j < other.mNumCols; j++) {
+            for (int k = 0; k < mNumCols; k++) {
                 result.mData[i][j] += mData[i][k] * other.mData[k][j];
             }
         }
@@ -159,9 +159,9 @@ Matrix Matrix::operator*(const Matrix& other) const {
 Vector Matrix::operator*(const Vector& vec) const {
     assert(mNumCols == vec.GetSize());
     Vector result(mNumRows);
-    for (int i = 0; i < mNumRows; ++i) {
+    for (int i = 0; i < mNumRows; i++) {
         double sum = 0.0;
-        for (int j = 0; j < mNumCols; ++j) {
+        for (int j = 0; j < mNumCols; j++) {
             sum += mData[i][j] * vec(j+1);  // Using 1-based indexing for Vector
         }
         result(i+1) = sum;
@@ -171,10 +171,8 @@ Vector Matrix::operator*(const Vector& vec) const {
 
 double Matrix::Determinant() const {
     // Kiểm tra ma trận vuông
-    if (mNumRows != mNumCols) {
-        throw runtime_error("Matrix must be square to compute determinant");
-    }//dung assert 
-    
+    assert(mNumRows == mNumCols && "Matrix must be square to compute determinant");
+
     //ma trận 1x1
     if (mNumRows == 1) {
         return mData[0][0];
@@ -193,9 +191,9 @@ double Matrix::Determinant() const {
         // Tạo ma trận con bỏ hàng 0 và cột hiện tại
         Matrix subMatrix(mNumRows - 1, mNumCols - 1);
         
-        for (int i = 1; i < mNumRows; ++i) {
+        for (int i = 1; i < mNumRows; i++) {
             int subCol = 0;
-            for (int j = 0; j < mNumCols; ++j) {
+            for (int j = 0; j < mNumCols; j++) {
                 if (j == col) continue;
                 subMatrix(i-1, subCol++) = mData[i][j];
             }
@@ -219,8 +217,8 @@ Matrix Matrix::Inverse() const {
     Matrix temp(*this); // Tạo bản sao để thao tác
     
     // Khởi tạo ma trận đơn vị
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < n; ++j) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
             result(i+1, j+1) = (i == j) ? 1.0 : 0.0;
         }
     }
@@ -245,7 +243,7 @@ Matrix Matrix::Inverse() const {
         
         // Đổi hàng nếu cần
         if (max_row != col) {
-            for (int j = 0; j < n; ++j) {
+            for (int j = 0; j < n; j++) {
                 swap(temp(col+1, j+1), temp(max_row+1, j+1));
                 swap(result(col+1, j+1), result(max_row+1, j+1));
             }

@@ -1,7 +1,8 @@
 #include <iostream>
 #include "Matrix.hpp"
 #include "Vector.hpp"
-#include "LinearSystem.hpp"
+#include "LinearSystemB.hpp" // Ensure this file exists and defines LinearSystemB"
+#include "LinearSystem.hpp"   // Ensure this file exists and defines LinearSystem
 using namespace std;
 int main() {
     // Test Matrix creation and assignment
@@ -25,16 +26,6 @@ int main() {
     cout << "Vector b:" << endl;
     for (int i = 1; i <= 2; ++i) {
         cout << b(i) << " ";
-    }
-    cout << endl;
-
-    // Test LinearSystem solve (assuming SolveWithTikhonov or similar exists)
-    LinearSystem system(A, b);
-    Vector x = system.SolveWithTikhonov(A, b);
-
-    cout << "Solution x:" << endl;
-    for (int i = 1; i <= 2; ++i) {
-        cout << x(i) << " ";
     }
     cout << endl;
 
@@ -63,18 +54,20 @@ int main() {
         }
     }
 
-    // Test LinearSystem solve (Gaussian elimination)
- 
-    Vector x_gauss = system.Solve();
+    
+    LinearSystem system(A, b);
+    Vector x = system.Solve();
 
-    cout << "Solution x (Gaussian elimination):" << endl;
+    cout << "Solution x:" << endl;
     for (int i = 1; i <= 2; ++i) {
-        cout << x_gauss(i) << " ";
+        cout << x(i) << " ";
     }
     cout << endl;
 
+    LinearSystemB system2(A, b);
+
     // Test LinearSystem solve with Tikhonov regularization
-    Vector x_tikh = system.SolveWithTikhonov(A, b);
+    Vector x_tikh = system2.SolveWithTikhonov(A, b);
 
     cout << "Solution x (Tikhonov regularization):" << endl;
     for (int i = 1; i <= 2; ++i) {
